@@ -37,6 +37,9 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.7",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
     "pdf-to-printer": "^5.5.0"
   }
 }
