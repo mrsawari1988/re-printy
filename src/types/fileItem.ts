@@ -1,9 +1,9 @@
 export type fileItem = {
-    fileName: string;
-    printerName: string;
-    filePath: string;
+    fileName?: string;
+    printerName?: string;
+    filePath?: string;
     copies: number;
-    id: string;
+    id?: number;
 };
 
 export type fileItems = fileItem[];
