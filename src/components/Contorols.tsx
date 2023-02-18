@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { useRef } from 'react';
 import useControls from '../hooks/useControls';
 import useValidation from './../hooks/useValidation';
-import { error, fileItem } from '@/types';
-export default function Contorols({ addFileHandler, printersList }) {
+import { error, fileItem, printers } from '@/types';
+
+type contorolsProps = {
+    addFileHandler: (fileItem: fileItem) => void;
+    printersList: printers;
+};
+export default function Contorols({ addFileHandler, printersList }: contorolsProps) {
     // refrence to the file input so later it's value will be cleared
     const fileRef = useRef<HTMLInputElement>(null);
-    const { state, changeHandler, buttonName, isActive, resetState } = useControls(fileRef);
+    const { state, changeHandler, buttonName, isActive, resetState, changeSelectHandler } =
+        useControls(fileRef, null);
     const { validator } = useValidation(fileRef);
     const [errors, setErrors] = useState<error[] | []>([]);
     const addFile = () => {
@@ -39,7 +45,11 @@ export default function Contorols({ addFileHandler, printersList }) {
                     />
                     {buttonName}
                 </label>
-                <select name='printerName' id='printer' onChange={(e) => changeHandler(e)}>
+                <select
+                    name='printerName'
+                    id='printer'
+                    onChange={(event) => changeSelectHandler(event)}
+                >
                     {/* render printers list */}
                     {printersList &&
                         printersList.map((printer) => (

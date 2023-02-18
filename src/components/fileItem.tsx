@@ -3,13 +3,13 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 type fileItemProps = {
-    fileName: string;
-    printerName: string;
+    fileName: string | undefined;
+    printerName: string | undefined;
     copies: number;
-    id: string;
+    id: number;
     item: fileItem;
-    deleteFileHandler: (id: string) => void;
-    setEditItem: (item: fileItem) => void;
+    deleteFileHandler: (id: number) => void;
+    setEditItem: (item: fileItem | null) => void;
     setOpenModal: (arg: boolean) => void;
     handle: boolean;
 };

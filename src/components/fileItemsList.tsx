@@ -9,10 +9,10 @@ type fileListSetter = (fileItems: fileItem[]) => fileItems;
 
 type fileItemListProps = {
     filesList: fileItem[];
-    deleteFileHandler: (id: string) => void;
+    deleteFileHandler: (id: number) => void;
     setFilesList: (fn: fileListSetter) => void;
-    setEditItem: () => void;
-    setOpenModal: () => void;
+    setEditItem: (item: fileItem | null) => void;
+    setOpenModal: (condition: boolean) => void;
 };
 
 export default function FileItemList({

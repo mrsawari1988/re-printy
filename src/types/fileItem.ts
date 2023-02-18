@@ -3,7 +3,7 @@ export type fileItem = {
     printerName?: string;
     filePath?: string;
     copies: number;
-    id?: number;
+    id: number;
 };
 
 export type fileItems = fileItem[];

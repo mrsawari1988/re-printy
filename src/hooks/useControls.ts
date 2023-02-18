@@ -1,8 +1,18 @@
-import { useState, Ref, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { fileItem } from '@/types';
-const useControls = (fileRef: any, initialState = { copies: 1 }) => {
+const useControls = (fileRef: any, initialState: fileItem | null) => {
+    let initState: fileItem;
+    if (initialState === null) {
+        initState = {
+            copies: 1,
+            id: Math.random(),
+        };
+    } else {
+        initState = { ...initialState };
+    }
     // this hook is used by contorols component and Modal component , so in modal we pass the editable item as the initial state
-    const [state, setState] = useState<fileItem | { copies: number }>({ ...initialState });
+    const [state, setState] = useState<fileItem>({ ...initState });
+    console.log(initState);
     //using this variable to set the button name to file name
     const [buttonName, setButtonName] = useState('choose a file');
     //this vatiable is being used to determine the button class
@@ -25,9 +35,13 @@ const useControls = (fileRef: any, initialState = { copies: 1 }) => {
         }
     };
 
+    const changeSelectHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+        setState((state) => ({ ...state, [event.target.name]: event.target.value }));
+    };
+
     const resetState = () => {
         setButtonName('Choose file');
-        setState({ copies: 1 });
+        setState({ copies: 1, id: Math.random() });
         //clearing the file input value
         fileRef.current.value = null;
         setIsActive(false);
@@ -38,6 +52,7 @@ const useControls = (fileRef: any, initialState = { copies: 1 }) => {
         buttonName,
         isActive,
         resetState,
+        changeSelectHandler,
     };
 };
 
